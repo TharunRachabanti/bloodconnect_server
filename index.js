@@ -8,7 +8,8 @@ const MessageImage = require("./messagesimages");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb.net/bloodconect_db&appName=Cluster0", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb.net/bloodconect_db?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
+
   .then(() => {
     console.log('Connected to MongoDB');
 
