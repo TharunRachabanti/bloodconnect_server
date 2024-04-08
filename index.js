@@ -8,7 +8,7 @@ const MessageImage = require("./messagesimages");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb.net/bloodconect_db&appName=Cluster0", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb.net/bloodconect_db&appName=Cluster0")
   .then(() => {
     console.log('Connected to MongoDB');
 
@@ -61,22 +61,20 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
       }
     });
     
-// Endpoint to retrieve image ID and message from MongoDB
-app.get("/api/get_image_message", async (req, res) => {
-  console.log(" image :", res.body);
-  try {
+    // Endpoint to retrieve image ID and message from MongoDB
+    app.get("/api/get_image_message", async (req, res) => {
+      console.log(" image :", res.body);
+      try {
 
-    // Fetch all data from the database
-    const data = await MessageImage.find();
-    res.status(200).json(data);
-    
-    console.log("Fetched Data:", data);
-  } catch (error) {
-    res.status(500).json({ status: error.message });
-  }
-});
-
-    
+        // Fetch all data from the database
+        const data = await MessageImage.find();
+        res.status(200).json(data);
+        
+        console.log("Fetched Data:", data);
+      } catch (error) {
+        res.status(500).json({ status: error.message });
+      }
+    });
 
     app.listen(3000, () => {
       console.log("Connected to server at port 3000");
@@ -85,4 +83,3 @@ app.get("/api/get_image_message", async (req, res) => {
   .catch((error) => {
     console.error('Error connecting to MongoDB', error);
   });
-
