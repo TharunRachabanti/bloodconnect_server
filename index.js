@@ -8,8 +8,7 @@ const MessageImage = require("./messagesimages");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb.net/bloodconect_db?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
-
+mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb.net/bloodconect_db&appName=Cluster0", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
 
@@ -47,23 +46,26 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
     });
 
     // Endpoint to store message and image ID in MongoDB
-app.post("/api/store_image_message", async (req, res) => {
-  console.log("Message and image :", req.body);
-  try {
-    const { imageUrl, message } = req.body;
-
-    // Save the message and image ID to the database
-    const newData = new MessageImage({ imageUrl, message });
-    const savedData = await newData.save();
-
-    res.status(200).json(savedData);
-  } catch (error) {
-    res.status(400).json({ status: error.message });
-  }
-});
+    app.post("/api/store_image_message", async (req, res) => {
+      console.log("Message and image :", req.body);
+      try {
+        const { imageUrl, message } = req.body; // Ensure correct field names
+    
+        // Save the message and image ID to the database
+        const newData = new MessageImage({ imageUrl, message });
+        const savedData = await newData.save();
+    
+        res.status(200).json(savedData);
+      } catch (error) {
+        res.status(400).json({ status: error.message });
+      }
+    });
+    
 // Endpoint to retrieve image ID and message from MongoDB
 app.get("/api/get_image_message", async (req, res) => {
+  console.log(" image :", res.body);
   try {
+
     // Fetch all data from the database
     const data = await MessageImage.find();
     res.status(200).json(data);
