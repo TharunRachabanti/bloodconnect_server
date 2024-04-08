@@ -63,7 +63,6 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
     
     // Endpoint to retrieve image ID and message from MongoDB
     app.get("/api/get_image_message", async (req, res) => {
-      console.log(" tharun", res.body);
       try {
 
         // Fetch all data from the database
