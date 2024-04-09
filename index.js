@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 const RequesterDetails = require("./requesterdetails");
 const MessageImage = require("./messagesimages");
+const DonateMeassageImage = require("./donatemessageimages")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -71,6 +72,20 @@ app.post("/api/store_image_message", async (req, res) => {
   }
 });
 
+app.post("/api/store_donate_image_message", async (req, res) => {
+  console.log("Message and image :", req.body);
+  try {
+    const { imageUrl, message } = req.body; // Ensure correct field names
+
+    // Save the message, image ID, and timestamp to the database
+    const newData = new DonateMeassageImage({ imageUrl, message });
+    const savedData = await newData.save();
+
+    res.status(200).json(savedData);
+  } catch (error) {
+    res.status(400).json({ status: error.message });
+  }
+});
     
     // Endpoint to retrieve image ID and message from MongoDB
     app.get("/api/get_image_message", async (req, res) => {
