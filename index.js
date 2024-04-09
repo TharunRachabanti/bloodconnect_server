@@ -106,7 +106,7 @@ app.post("/api/store_donate_image_message", async (req, res) => {
       try {
 
         // Fetch all data from the database
-        const data = await MessageImage.find();
+        const data = await DonateMeassageImage.find();
         res.status(200).json(data);
         
         console.log("Fetched Data:", data);
