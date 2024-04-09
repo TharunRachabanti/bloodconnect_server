@@ -28,6 +28,10 @@ let dataSchema = new mongoose.Schema({
     showInProfile: {
         type: Boolean,
         default: false // Default value if not provided
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now // Default value as current timestamp
     }
 });
 

@@ -15,22 +15,32 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
     // Endpoint to add requester data
     app.post("/api/add_requesterdata", async (req, res) => {
       console.log("Request Body:", req.body);
-
+  
       try {
-        const { rname, rbloodgroup, rgender, raddress, rphonenumber, rtag, showInProfile } = req.body;
-
-        // Ensure showInProfile is properly handled as a boolean
-        const isShowInProfile = showInProfile === 'true' || showInProfile === true;
-
-        // Save the request data to the database
-        const newData = new RequesterDetails({ rname, rbloodgroup, rgender, raddress, rphonenumber, rtag, showInProfile: isShowInProfile });
-        const savedData = await newData.save();
-
-        res.status(200).json(savedData);
+          const { rname, rbloodgroup, rgender, raddress, rphonenumber, rtag, showInProfile } = req.body;
+  
+          // Ensure showInProfile is properly handled as a boolean
+          const isShowInProfile = showInProfile === 'true' || showInProfile === true;
+  
+          // Save the request data to the database with timestamp
+          const newData = new RequesterDetails({ 
+              rname, 
+              rbloodgroup, 
+              rgender, 
+              raddress, 
+              rphonenumber, 
+              rtag, 
+              showInProfile: isShowInProfile,
+              createdAt: new Date() // Current timestamp
+          });
+          const savedData = await newData.save();
+  
+          res.status(200).json(savedData);
       } catch (error) {
-        res.status(400).json({ status: error.message });
+          res.status(400).json({ status: error.message });
       }
-    });
+  });
+  
 
     // Endpoint to get requested details
     app.get("/api/get_requesteddetails", async (req, res) => {
