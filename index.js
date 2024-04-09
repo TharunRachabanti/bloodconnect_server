@@ -101,6 +101,20 @@ app.post("/api/store_donate_image_message", async (req, res) => {
       }
     });
 
+
+    app.get("/api/get_Donate_image_message", async (req, res) => {
+      try {
+
+        // Fetch all data from the database
+        const data = await MessageImage.find();
+        res.status(200).json(data);
+        
+        console.log("Fetched Data:", data);
+      } catch (error) {
+        res.status(500).json({ status: error.message });
+      }
+    });
+
     app.listen(3000, () => {
       console.log("Connected to server at port 3000");
     });
