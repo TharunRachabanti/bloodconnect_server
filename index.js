@@ -73,12 +73,12 @@ app.post("/api/store_image_message", async (req, res) => {
 });
 
 app.post("/api/store_donate_image_message", async (req, res) => {
-  console.log("Message and image :", req.body);
+  console.log("Message and image:", req.body);
   try {
-    const { imageUrl, message } = req.body; // Ensure correct field names
+    const { imageUrl, message, userName } = req.body; // Ensure correct field names
 
-    // Save the message, image ID, and timestamp to the database
-    const newData = new DonateMeassageImage({ imageUrl, message });
+    // Save the message, image URL, current user's name, and timestamp to the database
+    const newData = new DonateMeassageImage({ imageUrl, message, userName });
     const savedData = await newData.save();
 
     res.status(200).json(savedData);
