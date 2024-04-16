@@ -9,6 +9,10 @@ let dataSchema = new mongoose.Schema({
         required: true,
         type: String
     },
+    username: {
+        required: true,
+        type: String
+    },
     createdAt: {
         type: Date,
         default: Date.now // Set default value to current timestamp
