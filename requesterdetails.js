@@ -29,6 +29,10 @@ let dataSchema = new mongoose.Schema({
         type: Boolean,
         default: false // Default value if not provided
     },
+    username: { // Add the username field to the schema
+        required: true,
+        type: String
+    },
     createdAt: {
         type: Date,
         default: Date.now // Default value as current timestamp

@@ -18,7 +18,7 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
       console.log("Request Body:", req.body);
   
       try {
-          const { rname, rbloodgroup, rgender, raddress, rphonenumber, rtag, showInProfile } = req.body;
+          const { rname, rbloodgroup, rgender, raddress, rphonenumber, rtag, showInProfile, username } = req.body;
   
           // Ensure showInProfile is properly handled as a boolean
           const isShowInProfile = showInProfile === 'true' || showInProfile === true;
@@ -32,6 +32,7 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
               rphonenumber, 
               rtag, 
               showInProfile: isShowInProfile,
+              username, // Include the username in the database entry
               createdAt: new Date() // Current timestamp
           });
           const savedData = await newData.save();
@@ -41,6 +42,7 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
           res.status(400).json({ status: error.message });
       }
   });
+  
   
 
     // Endpoint to get requested details
