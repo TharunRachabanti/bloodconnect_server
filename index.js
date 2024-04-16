@@ -57,20 +57,20 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
     });
 
     // Endpoint to store message, image ID, and timestamp in MongoDB
-app.post("/api/store_image_message", async (req, res) => {
-  console.log("Message and image :", req.body);
-  try {
-    const { imageUrl, message } = req.body; // Ensure correct field names
+    app.post("/api/store_image_message", async (req, res) => {
+      console.log("Message, image, and username:", req.body);
+      try {
+        const { imageUrl, message, username } = req.body; // Extract fields from request body
 
-    // Save the message, image ID, and timestamp to the database
-    const newData = new MessageImage({ imageUrl, message });
-    const savedData = await newData.save();
+        // Save the message, image URL, username, and timestamp to the database
+        const newData = new MessageImage({ imageUrl, message, username });
+        const savedData = await newData.save();
 
-    res.status(200).json(savedData);
-  } catch (error) {
-    res.status(400).json({ status: error.message });
-  }
-});
+        res.status(200).json(savedData);
+      } catch (error) {
+        res.status(400).json({ status: error.message });
+      }
+    });
 
 app.post("/api/store_donate_image_message", async (req, res) => {
   console.log("Message and image:", req.body);
