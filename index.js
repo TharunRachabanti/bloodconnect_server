@@ -75,7 +75,7 @@ mongoose.connect("mongodb+srv://tharunrachabanti:tharun@cluster0.gxmq3cs.mongodb
 app.post("/api/store_donate_image_message", async (req, res) => {
   console.log("Message and image:", req.body);
   try {
-    const { imageUrl, message, userName } = req.body; // Ensure correct field names
+    const { imageUrl, message, username } = req.body; // Ensure correct field names
 
     // Save the message, image URL, current user's name, and timestamp to the database
     const newData = new DonateMeassageImage({ imageUrl, message, userName });

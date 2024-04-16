@@ -9,7 +9,7 @@ let dataSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  userName: { // Include field for current user's name
+  username: { // Include field for current user's name
     required: true,
     type: String
   },
