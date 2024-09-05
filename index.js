@@ -118,8 +118,8 @@ app.post("/api/store_donate_image_message", async (req, res) => {
       }
     });
 
-    app.listen(3000, () => {
-      console.log("Connected to server at port 3000");
+    app.listen(80, () => {
+      console.log("Connected to server at port 80");
     });
   })
   .catch((error) => {
